@@ -23,12 +23,13 @@ export class ClientesFormComponent implements OnInit {
 
   onSubmit() {
     this.service.salvar(this.cliente).subscribe(
-      response => {
-        this.success = true
+      cliente => {
+        this.success = true;
         this.errors = null;
+        this.cliente = cliente;
       }, 
       errorResponse => {
-        this.errors = errorResponse.error.messageList
+        this.errors = errorResponse.error.messageList;
         this.success = false;
       }
     )

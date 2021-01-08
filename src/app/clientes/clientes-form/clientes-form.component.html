@@ -14,7 +14,7 @@
                   </div>
             </div>
         </div>
-        <div class="row">
+        <div class="row" *ngIf="success">
             <div class="col-md-6">
                 <div class="form-group">
                     <label>ID:</label>
@@ -24,8 +24,7 @@
             <div class="col-md-6">
                 <div class="form-group">
                     <label>Data de Cadastro:</label>
-                    <input type="text" class="form-control" [ngModel]="cliente.dataCadastro" name="dataCadastro"
-                        disabled>
+                    <input type="text" class="form-control" [ngModel]="cliente.dataCadastro | date:'dd/MM/yyyy'" name="dataCadastro" disabled>
                 </div>
             </div>
         </div>
