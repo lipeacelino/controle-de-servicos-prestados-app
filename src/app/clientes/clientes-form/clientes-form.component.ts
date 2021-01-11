@@ -14,8 +14,7 @@ export class ClientesFormComponent implements OnInit {
   errors: String [];
 
   constructor(private service: ClientesService) {
-    this.cliente = new Cliente
-    //this.cliente = service.getCliente();
+    this.cliente = new Cliente();
   }
 
   ngOnInit(): void {

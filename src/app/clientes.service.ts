@@ -16,10 +16,7 @@ export class ClientesService {
     return this.http.post<Cliente>('http://localhost:8080/api/clientes', cliente);
   }
 
-  getCliente(): Cliente {
-    let cliente: Cliente = new Cliente();
-    cliente.nome = "Fulano";
-    cliente.cpf = "234234234";
-    return cliente;
+  getClientes(): Observable<Cliente []> {
+    return this.http.get<Cliente []>('http://localhost:8080/api/clientes');
   }
 }
