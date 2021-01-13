@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { ControlContainer } from '@angular/forms';
+import { ActivatedRoute, Router } from '@angular/router';
 import { ClientesService } from 'src/app/clientes.service';
 import { Cliente } from '../cliente';
 
@@ -11,26 +13,53 @@ export class ClientesFormComponent implements OnInit {
 
   cliente: Cliente;
   success: boolean = false;
-  errors: String [];
+  errors: String[];
+  id: number;
 
-  constructor(private service: ClientesService) {
+  constructor(private service: ClientesService, private activatedRoute: ActivatedRoute, private route: Router) {
     this.cliente = new Cliente();
   }
 
   ngOnInit(): void {
+    this.activatedRoute.params
+      .subscribe(response => {
+        this.id = response['id'];
+        if (this.id) {
+          this.service.getClienteById(this.id).subscribe(
+            cliente => {
+              this.cliente = cliente;
+            },
+            () => {
+              this.cliente = new Cliente();
+            })
+        }
+      })
   }
+  //console.log(this.activatedRoute.params.(response => console.log(response['id'])));
+  //console.log(this.activatedRoute.snapshot.paramMap.get('id'));
 
   onSubmit() {
-    this.service.salvar(this.cliente).subscribe(
-      cliente => {
-        this.success = true;
-        this.errors = null;
-        this.cliente = cliente;
-      }, 
-      errorResponse => {
-        this.errors = errorResponse.error.messageList;
-        this.success = false;
-      }
-    )
+    if (this.id) {
+      this.service.editarCliente(this.cliente).subscribe(
+        () => {
+          this.success = true;
+        },
+        errorResponse => {
+          this.errors = errorResponse.error.messageList;
+          this.success = false;
+        });
+    } else {
+      this.service.salvar(this.cliente).subscribe(
+        cliente => {
+          this.success = true;
+          this.errors = null;
+          this.cliente = cliente;
+          this.route.navigate([ '/clientes-lista' ]);
+        },
+        errorResponse => {
+          this.errors = errorResponse.error.messageList;
+          this.success = false;
+        });
+    }
   }
 }
