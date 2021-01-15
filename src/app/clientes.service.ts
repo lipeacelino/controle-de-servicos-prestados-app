@@ -27,4 +27,5 @@ export class ClientesService {
   editarCliente(cliente: Cliente): Observable<any> {
     return this.http.put<Cliente>(`http://localhost:8080/api/clientes/${cliente.id}`, cliente);
   }
+  
 }

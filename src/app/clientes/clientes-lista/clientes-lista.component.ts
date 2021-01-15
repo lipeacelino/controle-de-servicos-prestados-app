@@ -10,12 +10,17 @@ import { Cliente } from '../cliente';
 export class ClientesListaComponent implements OnInit {
 
   clientes: Cliente [];
+  clienteSelecionado: Cliente;
 
   constructor(private service: ClientesService) { }
 
   ngOnInit(): void {
     this.service.getClientes()
     .subscribe(clientes => this.clientes = clientes);
+  }
+
+  preDelete(cliente: Cliente){
+    this.clienteSelecionado = cliente;
   }
 
 }

@@ -32,9 +32,29 @@
                         <button class="btn btn-primary col-md-4" [routerLink]="[ '/clientes-form', cliente.id ]">
                             <i class="fa fa-edit"></i>
                         </button>
+                        <button class="btn btn-danger col-md-4 ml-1" 
+                        data-toggle="modal" data-target="#modal-delecao" (click)="preDelete(cliente)">
+                            <i class="fa fa-trash"></i>
+                        </button>
                     </td>
                 </tbody>
             </table>
+        </div>
+    </div>
+    <div id="modal-delecao" class="modal fade" role="dialog" *ngIf="clienteSelecionado">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <bold>Confirmação:</bold>
+                </div>
+                <div class="modal-body">
+                    Deseja excluir o(a) cliente {{ clienteSelecionado.nome }}
+                </div>
+                <div class="modal-footer">
+                    <button class="btn btn-danger">Sim</button>
+                    <button class="btn btn-secondary" data-dismiss="modal">Não</button>
+                </div>
+            </div>
         </div>
     </div>
 </div>
