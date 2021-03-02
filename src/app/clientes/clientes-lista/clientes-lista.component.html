@@ -4,16 +4,6 @@
 </ol>
 <div class="container">
     <div class="row">
-        <div class="col-md-12">
-            <div class="alert alert-success" role="alert" *ngIf="success">
-                Cliente deletado com sucesso!
-              </div>
-              <div class="alert alert-danger" role="alert" *ngIf="errors">
-                {{ errors }}
-              </div>
-        </div>
-    </div>
-    <div class="row">
         <div class="col-md-2">
             <button class="btn btn-warning" routerLink="/clientes-form">
                 <i class="fa fa-plus"></i> Novo
@@ -55,13 +45,13 @@
         <div class="modal-dialog">
             <div class="modal-content">
                 <div class="modal-header">
-                    <strong>Confirmação:</strong>
+                    <bold>Confirmação:</bold>
                 </div>
                 <div class="modal-body">
                     Deseja excluir o(a) cliente {{ clienteSelecionado.nome }}
                 </div>
                 <div class="modal-footer">
-                    <button class="btn btn-danger" (click)="deletarCliente(clienteSelecionado)" data-dismiss="modal">Sim</button>
+                    <button class="btn btn-danger">Sim</button>
                     <button class="btn btn-secondary" data-dismiss="modal">Não</button>
                 </div>
             </div>

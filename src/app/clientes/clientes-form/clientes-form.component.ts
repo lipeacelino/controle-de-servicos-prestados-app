@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { ControlContainer } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { ClientesService } from 'src/app/clientes.service';
 import { Cliente } from '../cliente';
@@ -21,8 +22,8 @@ export class ClientesFormComponent implements OnInit {
 
   ngOnInit(): void {
     this.activatedRoute.params
-      .subscribe(response => {
-        this.id = response['id'];
+      .subscribe(urlParams => {
+        this.id = urlParams['id'];
         if (this.id) {
           this.service.getClienteById(this.id).subscribe(
             cliente => {
@@ -57,6 +58,7 @@ export class ClientesFormComponent implements OnInit {
         },
         errorResponse => {
           this.errors = errorResponse.error.messageList;
+          this.success = false;
         });
     }
   }
